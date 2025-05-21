@@ -38,6 +38,6 @@ spring:
           config:
             multi-statement-allow: true
 
-logging:
-  level:
-    com.darven.auth.domain.mapper: debug  #打印查询语句
+#logging:
+#  level:
+#    com.safewind.infra.mapper: debug  #打印查询语句

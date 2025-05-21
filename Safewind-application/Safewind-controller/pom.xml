@@ -32,6 +32,11 @@
             <groupId>com.safewind.domain</groupId>
             <artifactId>Safewind-domain</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
