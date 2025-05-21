@@ -120,6 +120,31 @@
                 <version>${commons-lang3.version}</version>
             </dependency>
 
+            <!--本地包-->
+            <dependency>
+                <groupId>com.safewind.common</groupId>
+                <artifactId>Safewind-common</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.safewind.application.controller</groupId>
+                <artifactId>Safewind-controller</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.safewind.domain</groupId>
+                <artifactId>Safewind-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.safewind.infra</groupId>
+                <artifactId>Safewind-infra</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
