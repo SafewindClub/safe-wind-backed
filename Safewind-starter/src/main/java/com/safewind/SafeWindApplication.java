@@ -1,5 +1,6 @@
 package com.safewind;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Description: TODO
  */
 @SpringBootApplication
+@MapperScan("com.safewind.infra.basic.dao")
 public class SafeWindApplication {
     public static void main(String[] args) {
         SpringApplication.run(SafeWindApplication.class,args);
