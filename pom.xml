@@ -46,6 +46,7 @@
         <guava.version>33.0.0-jre</guava.version>
         <hutool.version>5.8.26</hutool.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
+        <kaptcha.version>2.3.3</kaptcha.version>
     </properties>
 
     <!--统一管理-->
@@ -120,6 +121,12 @@
                 <version>${commons-lang3.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>pro.fessional</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+
             <!--本地包-->
             <dependency>
                 <groupId>com.safewind.common</groupId>
@@ -142,6 +149,24 @@
             <dependency>
                 <groupId>com.safewind.infra</groupId>
                 <artifactId>Safewind-infra</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.safewind.infra.basic</groupId>
+                <artifactId>Safewind-infra-basic</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.safewind.infra.redis</groupId>
+                <artifactId>Safewind-infra-redis</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.safewind.infra.security</groupId>
+                <artifactId>Safewind-infra-security</artifactId>
                 <version>${revision}</version>
             </dependency>
 

@@ -28,8 +28,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.safewind.infra</groupId>
-            <artifactId>Safewind-infra</artifactId>
+            <groupId>com.safewind.infra.basic</groupId>
+            <artifactId>Safewind-infra-basic</artifactId>
         </dependency>
     </dependencies>
 

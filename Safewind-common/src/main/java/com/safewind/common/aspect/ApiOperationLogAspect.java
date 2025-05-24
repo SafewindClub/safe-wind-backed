@@ -93,7 +93,6 @@ public class ApiOperationLogAspect {
     /**
      * 函数式接口写法
      * 转 JSON 字符串
-     * @param Object obj
      * @return String
      */
     private Function<Object, String> toJsonStr() {

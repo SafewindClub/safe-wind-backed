@@ -17,7 +17,7 @@ public class SysUserInfo implements Serializable {
 
     private Long id;
     /**
-     * 系统用户id
+     * 系统用户id，sysUserid
      */
     private Long sysUserId;
     /**

@@ -4,16 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.safewind.application</groupId>
-        <artifactId>Safewind-application</artifactId>
+        <groupId>com.safewind.infra</groupId>
+        <artifactId>Safewind-infra</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <groupId>com.safewind.application.controller</groupId>
-    <artifactId>Safewind-controller</artifactId>
+    <groupId>com.safewind.infra.security</groupId>
+    <artifactId>Safewind-infra-security</artifactId>
     <name>${project.artifactId}</name>
-    <description>控制层</description>
-    <packaging>jar</packaging>
+    <description>安全框架</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -22,30 +21,32 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>com.safewind.common</groupId>
             <artifactId>Safewind-common</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.safewind.domain</groupId>
-            <artifactId>Safewind-domain</artifactId>
+            <groupId>com.safewind.infra.basic</groupId>
+            <artifactId>Safewind-infra-basic</artifactId>
         </dependency>
 
+        <!--Spring Security依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <!-- 验证码 -->
         <dependency>
-            <groupId>com.safewind.infra.security</groupId>
-            <artifactId>Safewind-infra-security</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.safewind.infra.redis</groupId>
-            <artifactId>Safewind-infra-redis</artifactId>
+            <groupId>pro.fessional</groupId>
+            <artifactId>kaptcha</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

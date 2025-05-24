@@ -31,12 +31,21 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
-
-
         <dependency>
             <groupId>com.safewind.application.controller</groupId>
             <artifactId>Safewind-controller</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.safewind.infra.redis</groupId>
+            <artifactId>Safewind-infra-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.safewind.infra.security</groupId>
+            <artifactId>Safewind-infra-security</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -47,6 +56,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
