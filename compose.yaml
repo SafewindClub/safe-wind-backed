@@ -1,0 +1,39 @@
+name: local-safewind-backend
+
+services:
+  db:
+    image: mysql:lastest
+    environment:
+      MYSQL_DATABASE: safe-wind
+      MYSQL_USER: safe-wind
+      MYSQL_PASSWORD: local_safe_wind_pw
+    networks:
+      - safewind-website
+  redis:
+    image: redis:lastest
+    command: redis redis-server /redis_config
+    configs:
+      - redis_config
+    networks:
+      - safewind-website
+  safewind-backend:
+    build:
+      context: .
+      args:
+        REDIS_HOST: redis
+        REDIS_PORT: 6389
+        REDIS_PASSWORD: 123456
+        MYSQL_URL: db:3306
+        MYSQL_USERNAME: safe-wind
+        MYSQL_PASSWORD: local_safe_wind_pw
+    networks:
+      - safewind-website
+
+
+
+networks:
+  safewind-website:
+
+configs:
+  redis_config:
+    file: ./script/redis.conf
