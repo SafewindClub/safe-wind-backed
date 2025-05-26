@@ -46,4 +46,4 @@ jobs:
         name: ${{ steps.package-name.outputs.PACKAGE_NAME }}
         path: Safewind-starter/target/*.jar
         if-no-files-found: error
-        override: true
+        overwrite: true
