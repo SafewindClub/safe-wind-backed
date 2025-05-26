@@ -1,5 +1,30 @@
 # Safewind Website Backend
 
+## 检查单
+
+有些信息重复出现在版本库多处，更新时需要对照检查单同时更新所有处。
+
+### 服务器端口号
+
+- `Safewind-starter` 配置中的端口号
+- `./script/just_package.dockerfile` 中的开放端口号
+- `Dockerfile` 中的开放端口号
+
+### 数据库变更
+
+- 数据库结构变更须同时变更 `./script/sql/basic_schema.sql`
+- 数据库初始数据变更同时须变更 `./script/sql/basic_data.sql`
+
+### 版本号变更
+
+- `pom.xml` 中的 `reversion` 属性
+- `VERSION` 文件
+
+### 本地环境变更
+
+- `compose.yaml` 中 `safewind-backend` 服务的定义
+- `./script/local_env.sh` 中的环境变量定义
+
 ## 构建
 
 ### 打包
@@ -40,8 +65,6 @@ docker compose up
 docker compose up
 ```
 
-> TODO 目前所有镜像构建脚本将标签固定为 `safewind-backend:latest`, 后续需要变更为自定义指定。
-
 ### 数据库
 
-- MySQL数据库，可以使用 `./script/sql/basic_sql.sql` 脚本初始化。
+- MySQL数据库，可以使用 `./script/sql/basic_schema.sql` 脚本初始化。

@@ -1,6 +1,7 @@
 name: local-safewind-backend
 
 services:
+  # TODO MySQL 比服务器启动的更慢，可能会导致后端启动失败
   db:
     image: mysql:latest
     environment:
@@ -12,7 +13,7 @@ services:
       - safewind-website
     configs:
       - source: mysql_schema
-        target: /docker-entrypoint-initdb.d/basic_sql.sql
+        target: /docker-entrypoint-initdb.d/01-basic_schema.sql
 
   redis:
     image: redis:latest
@@ -49,4 +50,6 @@ configs:
   redis_config:
     file: ./script/redis.conf
   mysql_schema:
-    file: ./script/sql/basic_sql.sql
+    file: ./script/sql/basic_schema.sql
+  mysql_data:
+    file: ./script/sql/data.sql
