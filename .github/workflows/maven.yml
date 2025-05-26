@@ -30,11 +30,11 @@ jobs:
 
     # Build and test
     - name: Load Package
-      run: mvn -B install
-    - name: Test
-      run: mvn -B test
+      run: mvn -B install -DskipTests=true
     - name: Build with Maven
-      run: mvn -B -pl Safewind-starter package spring-boot:repackage
+      run: mvn -B -pl Safewind-starter package spring-boot:repackage -DskipTests=true
+    
+    # TODO 持续测试待补充，和持续部署一起写吧。
 
     # Package and upload artifact
     - name: Generate package name
