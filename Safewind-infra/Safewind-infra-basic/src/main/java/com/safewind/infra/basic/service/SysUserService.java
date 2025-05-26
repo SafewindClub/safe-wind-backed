@@ -43,4 +43,11 @@ public interface SysUserService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 通过学生学号查询
+     *
+     * @param studentId 学号
+     * @return 实例对象
+     */
+    SysUser queryByStudentId(String studentId);
 }

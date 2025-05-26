@@ -2,6 +2,7 @@ package com.safewind.application.controller.controller.common;
 
 import cn.hutool.core.codec.Base64;
 import com.safewind.application.controller.vo.CaptchaVO;
+import com.safewind.common.annotation.ApiOperationLog;
 import com.safewind.common.enums.ResultCodeEnum;
 import com.safewind.common.exception.BizException;
 import com.safewind.common.utils.Result;
@@ -38,6 +39,7 @@ public class CaptchaController {
     /**
      * 生成验证码
      */
+    @ApiOperationLog(description = "验证码获取")
     @GetMapping("/captchaImage")
     public Result<CaptchaVO> getCode(HttpServletResponse response) throws IOException {
         // 生成uuid

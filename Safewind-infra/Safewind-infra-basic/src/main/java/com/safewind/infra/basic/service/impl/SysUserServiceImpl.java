@@ -64,4 +64,15 @@ public class SysUserServiceImpl implements SysUserService {
     public boolean deleteById(Long id) {
         return this.sysUserDao.deleteById(id) > 0;
     }
+
+    /**
+     * 通过学生学号查询
+     *
+     * @param studentId 学号
+     * @return 实例对象
+     */
+    @Override
+    public SysUser queryByStudentId(String studentId) {
+       return this.sysUserDao.queryByStudentId(studentId);
+    }
 }

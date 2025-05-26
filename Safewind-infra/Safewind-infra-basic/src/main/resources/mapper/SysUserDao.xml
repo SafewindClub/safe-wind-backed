@@ -15,6 +15,62 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <resultMap type="com.safewind.infra.basic.entity.SysUser" id="SysUserWithInfoMap" extends="SysUserMap">
+        <association property="userInfo" javaType="com.safewind.infra.basic.entity.SysUserInfo">
+            <id property="id" column="user_info_id"/>
+            <result property="sysUserId" column="sys_user_id"/>
+            <result property="nickname" column="nickname"/>
+            <result property="avatar" column="avatar"/>
+            <result property="grade" column="grade"/>
+            <result property="speciality" column="speciality"/>
+            <result property="faculty" column="faculty"/>
+            <result property="name" column="name"/>
+            <result property="sex" column="sex"/>
+            <result property="className" column="class_name"/>
+            <result property="delFlag" column="user_info_del_flag"/>
+            <result property="createBy" column="user_info_create_by"/>
+            <result property="createTime" column="user_info_create_time"/>
+            <result property="updateBy" column="user_info_update_by"/>
+            <result property="updateTime" column="user_info_update_time"/>
+        </association>
+
+        <!-- SysRole -->
+        <association property="role" javaType="com.safewind.infra.basic.entity.SysRole">
+            <id property="roleId" column="role_id"/>
+            <result property="roleName" column="role_name"/>
+            <result property="roleKey" column="role_key"/>
+            <result property="roleSort" column="role_sort"/>
+            <result property="dataScope" column="data_scope"/>
+            <result property="delFlag" column="role_del_flag"/>
+            <result property="createBy" column="role_create_by"/>
+            <result property="createTime" column="role_create_time"/>
+            <result property="updateBy" column="role_update_by"/>
+            <result property="updateTime" column="role_update_time"/>
+        </association>
+    </resultMap>
+
+    <sql id="queryUserVo">
+        select u.id,
+               u.student_id,
+               u.password,
+               u.email,
+               u.openid,
+               u.del_flag,
+               u.create_by,
+               u.create_time,
+               u.update_by,
+               u.update_time,
+
+               r.role_id,
+               r.role_name,
+               r.role_key,
+               r.role_sort,
+               r.data_scope
+        from sys_user u
+                 left join sys_user_role ur on u.id = ur.user_id
+                 left join sys_role r on r.role_id = ur.role_id
+    </sql>
+
     <!--查询单个-->
     <select id="queryById" resultMap="SysUserMap">
         select id,
@@ -109,13 +165,35 @@
         </where>
     </select>
 
+
     <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into sys_user(student_id, password, email, openid, del_flag, create_by, create_time, update_by,
-                             update_time)
-        values (#{studentId}, #{password}, #{email}, #{openid}, #{delFlag}, #{createBy}, #{createTime}, #{updateBy},
-                #{updateTime})
-    </insert>
+   <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="studentId != null and studentId != ''">student_id,</if>
+        <if test="password != null and password != ''">password,</if>
+        <if test="email != null and email != ''">email,</if>
+        <if test="openid != null and openid != ''">openid,</if>
+        <if test="delFlag != null and delFlag != ''">del_flag,</if>
+        <if test="createBy != null and createBy != ''">create_by,</if>
+        <if test="createTime != null">create_time,</if>
+        <if test="updateBy != null and updateBy != ''">update_by,</if>
+        <if test="updateTime != null">update_time,</if>
+    </trim>
+
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="studentId != null and studentId != ''">#{studentId},</if>
+        <if test="password != null and password != ''">#{password},</if>
+        <if test="email != null and email != ''">#{email},</if>
+        <if test="openid != null and openid != ''">#{openid},</if>
+        <if test="delFlag != null and delFlag != ''">#{delFlag},</if>
+        <if test="createBy != null and createBy != ''">#{createBy},</if>
+        <if test="createTime != null">#{createTime},</if>
+        <if test="updateBy != null and updateBy != ''">#{updateBy},</if>
+        <if test="updateTime != null">#{updateTime},</if>
+    </trim>
+</insert>
+
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
         insert into sys_user(student_id, password, email, openid, del_flag, create_by, create_time, update_by,
@@ -188,6 +266,11 @@
         from sys_user
         where id = #{id}
     </delete>
+
+    <select id="queryByStudentId" resultType="com.safewind.infra.basic.entity.SysUser">
+        <include refid="queryUserVo"/>
+        WHERE u.student_id = #{studentId}
+    </select>
 
 </mapper>
 

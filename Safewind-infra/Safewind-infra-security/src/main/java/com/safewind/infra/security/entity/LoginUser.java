@@ -1,11 +1,13 @@
 package com.safewind.infra.security.entity;
 
+import com.safewind.infra.basic.entity.SysUser;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Author: Darven
@@ -30,7 +32,28 @@ public class LoginUser implements UserDetails {
     /**
      *  用户信息
      * */
-    private UserRoleInfo user;
+    private SysUser user;
+
+    /**
+     * 菜单/权限
+     * */
+    private Set<String> permissions;
+
+    /**
+     * 登录时间
+     * */
+    private Long loginTime;
+
+    /**
+     * 过期时间
+     * */
+    private Long expireTime;
+
+    public LoginUser(Long userId, SysUser user)
+    {
+        this.userId = userId;
+        this.user = user;
+    }
 
     /**
      * 返回数据库的密码
@@ -77,7 +100,7 @@ public class LoginUser implements UserDetails {
      * */
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     @Override

@@ -88,7 +88,7 @@ public class GlobalException {
     @ExceptionHandler({IllegalArgumentException.class})
     @ResponseBody
     public Result<Object> handleIllegalArgumentException(HttpServletRequest request,IllegalArgumentException e){
-        log.info("{} param validated ,",request.getRequestURI(), e);
+        log.warn("{} param validated ,",request.getRequestURI(), e);
         return Result.fail(ResultCodeEnum.VALIDATION_FAILED,e.getMessage());
     }
 }

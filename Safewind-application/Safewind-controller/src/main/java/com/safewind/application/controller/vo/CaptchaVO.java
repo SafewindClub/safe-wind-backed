@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CaptchaVO {
+
     /**
      * uuid，追踪验证码
      * */

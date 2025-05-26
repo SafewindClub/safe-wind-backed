@@ -1,6 +1,6 @@
 safe-wind:
   # 验证码类型 math 数字计算 char 字符验证
-  captchaType: char
+  captchaType: math
 
 spring:
   profiles:
@@ -32,3 +32,11 @@ mybatis:
   # MyBatis xml 配置文件路径
   mapper-locations: classpath:/mapper/**/*.xml
 
+# token配置
+token:
+  # 令牌自定义标识
+  header: Authorization
+  # 令牌密钥
+  secret: 120cb90eda07377285a3a36c98b0eb4
+  # 令牌有效期（默认30分钟）
+  expireTime: 30
