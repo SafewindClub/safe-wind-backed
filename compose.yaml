@@ -2,34 +2,45 @@ name: local-safewind-backend
 
 services:
   db:
-    image: mysql:lastest
+    image: mysql:latest
     environment:
+      MYSQL_ROOT_PASSWORD: local_safe_wind_pw
       MYSQL_DATABASE: safe-wind
       MYSQL_USER: safe-wind
       MYSQL_PASSWORD: local_safe_wind_pw
     networks:
       - safewind-website
+    configs:
+      - source: mysql_schema
+        target: /docker-entrypoint-initdb.d/basic_sql.sql
+
   redis:
-    image: redis:lastest
-    command: redis redis-server /redis_config
+    image: redis:latest
+    command: redis-server /redis_config
     configs:
       - redis_config
     networks:
       - safewind-website
+
   safewind-backend:
+    image: safewind-backend:latest
     build:
       context: .
-      args:
+      tags:
+        - "safewind-backend:latest"
+      args: &local_env
+        # 更新这里需要同步更新 local.env 文件
         REDIS_HOST: redis
-        REDIS_PORT: 6389
+        rEDIS_PORT: 6389
         REDIS_PASSWORD: 123456
         MYSQL_URL: db:3306
         MYSQL_USERNAME: safe-wind
         MYSQL_PASSWORD: local_safe_wind_pw
+    pull_policy: never
+    environment:
+      <<: *local_env
     networks:
       - safewind-website
-
-
 
 networks:
   safewind-website:
@@ -37,3 +48,5 @@ networks:
 configs:
   redis_config:
     file: ./script/redis.conf
+  mysql_schema:
+    file: ./script/sql/basic_sql.sql

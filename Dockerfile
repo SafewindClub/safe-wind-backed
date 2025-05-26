@@ -21,4 +21,5 @@ FROM openjdk:17 AS run
 LABEL authors="ll06p"
 WORKDIR /app
 COPY --from=build /app/Safewind-starter/target/Safewind-starter-*.jar Safewind-starter.jar
+EXPOSE 9300/tcp
 ENTRYPOINT ["java", "-jar", "Safewind-starter.jar"]
