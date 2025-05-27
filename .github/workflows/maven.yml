@@ -71,17 +71,14 @@ jobs:
     - name: Rename package
       run: mkdir ./build/package && mv ./build/*.jar ./build/package/${{ needs.build.outputs.package-name }}
     
-    - name: Upload archive
-      working-directory: build
-      run: |
-        echo ${{ secrets.SSH_PRIVATE_KEY }} >./key
-        scp -B -i ./key ./package/${{ needs.build.outputs.package-name }} ${{ format('scp://github-action@{0}/site-deploy/archives/', secrets.HOST) }}
-    - name: Execute delopy script on Host
-      uses: appleboy/ssh-action@v1
+    - name: Upload to Host
+      uses: easingthemes/ssh-deploy@v5.1.0
       with:
-        host: ${{ secrets.HOST }}
-        username: github-action
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          cd ~/site-deploy
-          sudo ./bootstrap.sh ${{ needs.build.outputs.package-name }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        REMOTE_HOST: ${{ secrets.HOST }}
+        REMOTE_USER: github-action
+        SOURCE: ./build/package/${{ needs.build.outputs.package-name }}
+        TARGET: ~/site-deploy/archives
+        SCRIPT_AFTER: |
+          cd ~/site-deploy/
+          sudo ./bootstrap.sh ${{ nedds.build.outptus.package-name }}
