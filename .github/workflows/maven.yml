@@ -45,7 +45,7 @@ jobs:
     - name: Upload package
       uses: actions/upload-artifact@v4.6.2
       with:
-        name: ${{ steps.package-name.outputs.PACKAGE_NAME }}
+        name: ${{ steps.package-name.outputs.PACKAGE_NAME }}.tar
         path: Safewind-starter/target/*.jar
         if-no-files-found: error
         overwrite: true
@@ -60,17 +60,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    
     - name: Download package
       uses: actions/download-artifact@v4.3.0
       with:
-        name: ${{ needs.build.outputs.package-name }}
+        name: ${{ needs.build.outputs.package-name }}.tar
+        path: ./build
+    - name: Rename package
+      run: mv ./build/* ./build/${{ needs.build.outputs.package-name }}
+    
     - name: Upload archive
       uses: appleboy/scp-action@v1
       with:
         host: ${{ secrets.HOST }}
         username: github-action
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: ${{ needs.build.outputs.package-name }}
+        source: ./build/${{ needs.build.outputs.package-name }}
         target: ~/site-deploy/archives
         overwrite: true
     - name: Execute delopy script on Host
