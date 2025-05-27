@@ -52,7 +52,7 @@ jobs:
 
     runs-on: ubunbtu-latest
     needs: build
-    if: ${{ github.ref = 'refs/heads/${{ matrix.branch }}' }}
+    if: ${{ github.ref == 'refs/heads/${{ matrix.branch }}' }}
     
     strategy:
       matrix:
