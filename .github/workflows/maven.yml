@@ -71,7 +71,7 @@ jobs:
         username: github-action
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: ${{ needs.build.outputs.package-name }}
-        target: ~/site-deploy/arcihves
+        target: ~/site-deploy/archives
     - name: Execute delopy script on Host
       uses: appleboy/ssh-action@v1
       with:
