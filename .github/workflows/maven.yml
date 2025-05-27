@@ -19,7 +19,7 @@ jobs:
 
     runs-on: ubuntu-latest
     outputs:
-      pakcage-name: ${{ steps.package-name.outputs.PACKAGE_NAME }}
+      package-name: ${{ steps.package-name.outputs.PACKAGE_NAME }}
 
     steps:
     - uses: actions/checkout@v4
