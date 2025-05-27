@@ -1,0 +1,96 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Build and Test
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    # Build and test
+    - name: Load Package
+      run: mvn -B install -DskipTests=true
+    - name: Build with Maven
+      run: mvn -B -pl Safewind-starter package spring-boot:repackage -DskipTests=true
+    
+    # TODO 持续测试待补充，和持续部署一起写吧。
+
+    # Package and upload artifact
+    - name: Generate package name
+      id: package-name
+      run: echo "PACKAGE_NAME=Safewind-starter-$(cat VERSION).jar" >> "$GITHUB_OUTPUT"
+    - name: Upload package
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: ${{ steps.package-name.outputs.PACKAGE_NAME }}
+        path: Safewind-starter/target/*.jar
+        if-no-files-found: error
+        overwrite: true
+        
+  deploy:
+
+    runs-on: ubunbtu-latest
+    needs: build
+    if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' }}
+    
+    strategy:
+      matrix:
+        branch: [ 'main', 'dev']
+        deploy-env: [ 'production', 'development']
+        include:
+          - branch: 'main'
+            deploy-env: 'production'
+          - branch: 'dev'
+            depoly-env: 'development'
+
+    environment: ${{ matrix.delopy-env }}
+
+    steps:
+    - uses: actions/checkout@v4
+    # Package and upload artifact
+    - name: Generate package name
+      id: package-name
+      run: echo "PACKAGE_NAME=Safewind-starter-$(cat VERSION).jar" >> "$GITHUB_OUTPUT"
+    
+    - name: Download package
+      uses: actions/download-artifact@v4.3.0
+      with:
+        name: ${{ steps.package-name.outputs.PACKAGE_NAME }}
+    - name: Upload archive
+      uses: appleboy/scp-action@v1
+      with:
+        host: ${{ secrets.HOST }}
+        username: github-action
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: ${{ steps.package-name.outputs.PACKAGE_NAME }}
+        target: ~/site-depoly/arcihves
+    - name: Execute delopy script on Host
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.HOST }}
+        username: github-action
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd ~/site-depoly
+          ./bootstrap.sh ${{ steps.package-name.outputs.PACKAGE_NAME }}
