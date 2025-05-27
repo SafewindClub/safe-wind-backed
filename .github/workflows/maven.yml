@@ -75,7 +75,7 @@ jobs:
       working-directory: build
       run: |
         echo ${{ secrets.SSH_PRIVATE_KEY }} >./key
-        scp -B -i ./key ./package/${{ needs.build.outputs.package-name }} ${{ format('scp://github-action@{0}/site-deploy/archives/') }}
+        scp -B -i ./key ./package/${{ needs.build.outputs.package-name }} ${{ format('scp://github-action@{0}/site-deploy/archives/', secrets.HOST) }}
     - name: Execute delopy script on Host
       uses: appleboy/ssh-action@v1
       with:
