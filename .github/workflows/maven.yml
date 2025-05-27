@@ -47,3 +47,50 @@ jobs:
         path: Safewind-starter/target/*.jar
         if-no-files-found: error
         overwrite: true
+        
+  deploy:
+
+    runs-on: ubunbtu-latest
+    needs: build
+    if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' }}
+    
+    strategy:
+      matrix:
+        branch: [ 'main', 'dev']
+        deploy-env: [ 'production', 'development']
+        include:
+          - branch: 'main'
+            deploy-env: 'production'
+          - branch: 'dev'
+            depoly-env: 'development'
+
+    environment: ${{ matrix.delopy-env }}
+
+    steps:
+    - uses: actions/checkout@v4
+    # Package and upload artifact
+    - name: Generate package name
+      id: package-name
+      run: echo "PACKAGE_NAME=Safewind-starter-$(cat VERSION).jar" >> "$GITHUB_OUTPUT"
+    
+    - name: Download package
+      uses: actions/download-artifact@v4.3.0
+      with:
+        name: ${{ steps.package-name.outputs.PACKAGE_NAME }}
+    - name: Upload archive
+      uses: appleboy/scp-action@v1
+      with:
+        host: ${{ secrets.HOST }}
+        username: github-action
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: ${{ steps.package-name.outputs.PACKAGE_NAME }}
+        target: ~/site-depoly/arcihves
+    - name: Execute delopy script on Host
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.HOST }}
+        username: github-action
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd ~/site-depoly
+          ./bootstrap.sh ${{ steps.package-name.outputs.PACKAGE_NAME }}
