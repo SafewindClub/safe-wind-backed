@@ -80,4 +80,4 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd ~/site-deploy
-          ./bootstrap.sh ${{ needs.build.outputs.package-name }}
+          sudo ./bootstrap.sh ${{ needs.build.outputs.package-name }}
