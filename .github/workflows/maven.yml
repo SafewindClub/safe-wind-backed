@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       package-name: ${{ steps.package-name.outputs.PACKAGE_NAME }}
+      package-url: ${{ steps.upload-package.artifact-url }}
 
     steps:
     - uses: actions/checkout@v4
@@ -43,9 +44,10 @@ jobs:
       id: package-name
       run: echo "PACKAGE_NAME=Safewind-starter-$(cat VERSION).jar" >> "$GITHUB_OUTPUT"
     - name: Upload package
+      id: upload-package
       uses: actions/upload-artifact@v4.6.2
       with:
-        name: ${{ steps.package-name.outputs.PACKAGE_NAME }}.tar
+        name: ${{ steps.package-name.outputs.PACKAGE_NAME }}
         path: Safewind-starter/target/*.jar
         if-no-files-found: error
         overwrite: true
@@ -64,20 +66,16 @@ jobs:
     - name: Download package
       uses: actions/download-artifact@v4.3.0
       with:
-        name: ${{ needs.build.outputs.package-name }}.tar
+        name: ${{ needs.build.outputs.package-name }}
         path: ./build/
     - name: Rename package
       run: mkdir ./build/package && mv ./build/*.jar ./build/package/${{ needs.build.outputs.package-name }}
     
     - name: Upload archive
-      uses: appleboy/scp-action@v1
-      with:
-        host: ${{ secrets.HOST }}
-        username: github-action
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: ./build/package/${{ needs.build.outputs.package-name }}
-        target: ~/site-deploy/archives
-        overwrite: true
+      working-directory: build
+      run: |
+        echo ${{ secrets.SSH_PRIVATE_KEY }} >./key
+        scp -B -i ./key ./package/${{ needs.build.outputs.package-name }} ${{ format('scp://github-action@{0}/site-deploy/archives/') }}
     - name: Execute delopy script on Host
       uses: appleboy/ssh-action@v1
       with:
