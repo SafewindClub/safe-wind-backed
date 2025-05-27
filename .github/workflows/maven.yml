@@ -65,9 +65,9 @@ jobs:
       uses: actions/download-artifact@v4.3.0
       with:
         name: ${{ needs.build.outputs.package-name }}.tar
-        path: ./build
+        path: ./build/
     - name: Rename package
-      run: mv ./build/* ./build/${{ needs.build.outputs.package-name }}
+      run: mkdir ./build/package && mv ./build/*.jar ./build/package/${{ needs.build.outputs.package-name }}
     
     - name: Upload archive
       uses: appleboy/scp-action@v1
@@ -75,7 +75,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: github-action
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: ./build/${{ needs.build.outputs.package-name }}
+        source: ./build/package/${{ needs.build.outputs.package-name }}
         target: ~/site-deploy/archives
         overwrite: true
     - name: Execute delopy script on Host
