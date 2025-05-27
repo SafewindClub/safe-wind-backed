@@ -81,4 +81,4 @@ jobs:
         TARGET: ~/site-deploy/archives
         SCRIPT_AFTER: |
           cd ~/site-deploy/
-          sudo ./bootstrap.sh ${{ needs.build.outptus.package-name }}
+          sudo ./bootstrap.sh ${{ needs.build.outputs.package-name }}
