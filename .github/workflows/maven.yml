@@ -72,6 +72,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: ${{ needs.build.outputs.package-name }}
         target: ~/site-deploy/archives
+        overwrite: true
     - name: Execute delopy script on Host
       uses: appleboy/ssh-action@v1
       with:
