@@ -1,0 +1,55 @@
+name: local-safewind-backend
+
+services:
+  # TODO MySQL 比服务器启动的更慢，可能会导致后端启动失败
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: local_safe_wind_pw
+      MYSQL_DATABASE: safe-wind
+      MYSQL_USER: safe-wind
+      MYSQL_PASSWORD: local_safe_wind_pw
+    networks:
+      - safewind-website
+    configs:
+      - source: mysql_schema
+        target: /docker-entrypoint-initdb.d/01-basic_schema.sql
+
+  redis:
+    image: redis:latest
+    command: redis-server /redis_config
+    configs:
+      - redis_config
+    networks:
+      - safewind-website
+
+  safewind-backend:
+    image: safewind-backend:latest
+    build:
+      context: .
+      tags:
+        - "safewind-backend:latest"
+      args: &local_env
+        # 更新这里需要同步更新 local.env 文件
+        REDIS_HOST: redis
+        rEDIS_PORT: 6389
+        REDIS_PASSWORD: 123456
+        MYSQL_URL: db:3306
+        MYSQL_USERNAME: safe-wind
+        MYSQL_PASSWORD: local_safe_wind_pw
+    pull_policy: never
+    environment:
+      <<: *local_env
+    networks:
+      - safewind-website
+
+networks:
+  safewind-website:
+
+configs:
+  redis_config:
+    file: ./script/redis.conf
+  mysql_schema:
+    file: ./script/sql/basic_schema.sql
+  mysql_data:
+    file: ./script/sql/data.sql

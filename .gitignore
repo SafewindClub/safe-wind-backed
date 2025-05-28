@@ -39,4 +39,5 @@ build/
 
 .flattened-pom.xml
 *.env
+!script/local.env
 logs/
