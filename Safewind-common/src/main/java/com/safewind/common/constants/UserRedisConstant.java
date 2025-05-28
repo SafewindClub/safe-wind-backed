@@ -1,4 +1,4 @@
-package com.safewind.infra.redis.constants;
+package com.safewind.common.constants;
 
 /**
  * @Author: Darven

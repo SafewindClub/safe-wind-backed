@@ -1,4 +1,4 @@
-package com.safewind.infra.redis.utils;
+package com.safewind.common.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundSetOperations;
@@ -12,11 +12,12 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: Darven
- * @CreateTime: 2025-05-24  00:05
- * @Description: redis工具类
+ * @CreateTime: 2025-05-28  15:01
+ * @Description: TODO
  */
 @Component
 public class RedisUtil {
+
     @Autowired
     public RedisTemplate redisTemplate;
 

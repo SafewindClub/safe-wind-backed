@@ -37,13 +37,13 @@
         </dependency>
 
         <dependency>
-            <groupId>com.safewind.infra.redis</groupId>
-            <artifactId>Safewind-infra-redis</artifactId>
+            <groupId>com.safewind.infra.security</groupId>
+            <artifactId>Safewind-infra-security</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.safewind.infra.security</groupId>
-            <artifactId>Safewind-infra-security</artifactId>
+            <groupId>com.safewind.common</groupId>
+            <artifactId>Safewind-common</artifactId>
         </dependency>
 
     </dependencies>

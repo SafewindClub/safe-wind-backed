@@ -5,11 +5,9 @@ import com.safewind.application.controller.vo.UserLoginVO;
 import com.safewind.common.annotation.ApiOperationLog;
 import com.safewind.common.utils.Result;
 import com.safewind.infra.security.service.SysLoginService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author: Darven
@@ -40,5 +38,11 @@ public class UserController {
     @PostMapping("/register")
     public Result<UserLoginVO> register(@RequestBody UserLoginDTO userLoginDTO){
         return Result.success();
+    }
+
+    @ApiOperationLog(description = "获取用户信息")
+    @GetMapping("/getLoginUser")
+    public Result<String> getLoginUser(){
+        return Result.success("成功");
     }
 }

@@ -40,3 +40,5 @@ token:
   secret: 120cb90eda07377285a3a36c98b0eb4
   # 令牌有效期（默认30分钟）
   expireTime: 30
+  # 前端请求前缀
+  prefix: Bearer

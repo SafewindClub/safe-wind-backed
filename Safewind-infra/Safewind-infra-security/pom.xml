@@ -37,11 +37,6 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.safewind.infra.redis</groupId>
-            <artifactId>Safewind-infra-redis</artifactId>
-        </dependency>
-
         <!-- 验证码 -->
         <dependency>
             <groupId>pro.fessional</groupId>

@@ -25,4 +25,8 @@ public class TokenConfig {
      * 令牌过期时间
      * */
     private Integer expireTime;
+    /**
+     * 请求头前缀
+     * */
+    private String prefix;
 }

@@ -104,6 +104,12 @@
                 <version>${jackson.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
             <!-- 相关工具类 -->
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -127,6 +133,12 @@
                 <groupId>pro.fessional</groupId>
                 <artifactId>kaptcha</artifactId>
                 <version>${kaptcha.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>2.0.53</version>
             </dependency>
 
             <!-- Token生成与解析-->
@@ -170,12 +182,6 @@
             <dependency>
                 <groupId>com.safewind.infra.basic</groupId>
                 <artifactId>Safewind-infra-basic</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.safewind.infra.redis</groupId>
-                <artifactId>Safewind-infra-redis</artifactId>
                 <version>${revision}</version>
             </dependency>
 

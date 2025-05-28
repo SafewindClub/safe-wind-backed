@@ -35,7 +35,7 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
@@ -43,10 +43,6 @@
             <artifactId>Safewind-infra-security</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.safewind.infra.redis</groupId>
-            <artifactId>Safewind-infra-redis</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

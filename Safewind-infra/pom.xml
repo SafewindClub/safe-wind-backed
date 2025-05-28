@@ -16,7 +16,6 @@
     <modules>
         <module>Safewind-infra-basic</module>
         <module>Safewind-infra-security</module>
-        <module>Safewind-infra-redis</module>
     </modules>
     <packaging>pom</packaging>
 
