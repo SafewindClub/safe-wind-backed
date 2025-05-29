@@ -31,6 +31,11 @@
             <groupId>com.safewind.infra.basic</groupId>
             <artifactId>Safewind-infra-basic</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.safewind.infra.file</groupId>
+            <artifactId>Safewind-infra-file</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
