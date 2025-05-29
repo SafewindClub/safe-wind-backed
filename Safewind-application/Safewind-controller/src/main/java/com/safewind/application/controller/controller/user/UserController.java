@@ -5,8 +5,11 @@ import com.safewind.application.controller.vo.UserLoginVO;
 import com.safewind.application.controller.vo.UserVO;
 import com.safewind.common.annotation.ApiOperationLog;
 import com.safewind.common.utils.Result;
+import com.safewind.domain.bo.UserBO;
+import com.safewind.domain.service.UserDomainService;
 import com.safewind.infra.security.service.SysLoginService;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +18,16 @@ import org.springframework.web.bind.annotation.*;
  * @CreateTime: 2025-05-23  23:32
  * @Description: 用户控制层
  */
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private SysLoginService loginService;
+
+    @Autowired
+    private UserDomainService userDomainService;
 
     @ApiOperationLog(description = "登录接口")
     @PostMapping("/login")
@@ -49,7 +56,27 @@ public class UserController {
 
     @ApiOperationLog(description = "用户中心")
     @GetMapping("/getUserInfo")
-    public Result<UserVO> getUserInfo(@RequestParam("userId") Long userId){
-        return null;
+    public Result<UserVO> getUserInfo(){
+        UserBO userBO = userDomainService.getUserInfo();
+        log.info("userBO={}", userBO);
+        // todo 不太优雅，考虑用MapStruct
+        UserVO userVO = UserVO.builder()
+                .userId(userBO.getUserId())
+                .studentId(userBO.getStudentId())
+                .email(userBO.getEmail())
+                .nickname(userBO.getUserInfo().getNickname())
+                .avatar(userBO.getUserInfo().getAvatar())
+                .grade(userBO.getUserInfo().getGrade())
+                .speciality(userBO.getUserInfo().getSpeciality())
+                .faculty(userBO.getUserInfo().getFaculty())
+                .userInfoName(userBO.getUserInfo().getName())
+                .sex(userBO.getUserInfo().getSex())
+                .className(userBO.getUserInfo().getClassName())
+                .roleName(userBO.getRole().getRoleName())
+                .roleKey(userBO.getRole().getRoleKey())
+                .deptName(userBO.getDept().getName())
+                .build();
+        log.info("==> getUserInfo获得信息={}",userVO);
+        return Result.success(userVO);
     }
 }

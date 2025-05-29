@@ -11,6 +11,6 @@ public interface UserDomainService {
     /**
      * 查询用户信息（用户中心）
      * */
-    UserBO getUserInfo(Long userId);
+    UserBO getUserInfo();
 
 }

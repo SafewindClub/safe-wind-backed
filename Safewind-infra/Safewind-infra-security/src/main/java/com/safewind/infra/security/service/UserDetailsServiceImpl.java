@@ -35,6 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 查询数据库
         SysUser sysUser = sysUserService.queryByStudentId(username);
+        log.info("登录查询的用户信息={}",sysUser);
         if(Objects.isNull(sysUser)){
             log.info("登录用户：{} 不存在.", username);
             throw new BizException(UserExceptionEnum.NO_EXIST);

@@ -13,9 +13,9 @@ import lombok.Data;
 @Builder
 public class UserBO {
     /**
-     * 主键
+     * 用户id
      */
-    private Long id;
+    private Long userId;
 
     /**
      * 登录用户名，学号
