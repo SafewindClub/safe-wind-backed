@@ -41,3 +41,13 @@ spring:
 logging:
   level:
     com.safewind.infra.basic.dao: debug  #打印查询语句
+
+# minio存储
+minio:
+  endpoint: https://img.darven.cn
+  access-key: dDQy9qy7pOuag6KgmFZ7
+  secret-key: S53v0bou92d8VYWYFcF4ZTI5F3Ru21fpICTYCw8X
+  bucket-name: safe-wind
+
+file:
+  type: minio

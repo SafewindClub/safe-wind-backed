@@ -28,7 +28,7 @@
 
     <properties>
         <!--项目版本号-->
-        <revision>0.0.0-SNAPSHOT</revision>
+        <revision>0.0.1-SNAPSHOT</revision>
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -49,6 +49,7 @@
         <kaptcha.version>2.3.3</kaptcha.version>
         <jwt.version>0.9.1</jwt.version>
         <jaxb.version>2.3.1</jaxb.version>
+        <minio.version>8.2.2</minio.version>
     </properties>
 
     <!--统一管理-->
@@ -189,6 +190,19 @@
                 <groupId>com.safewind.infra.security</groupId>
                 <artifactId>Safewind-infra-security</artifactId>
                 <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.safewind.infra.file</groupId>
+                <artifactId>Safewind-infra-file</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!--文件存储依赖-->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
 
         </dependencies>

@@ -2,6 +2,7 @@ package com.safewind.application.controller.controller.user;
 
 import com.safewind.application.controller.dto.UserLoginDTO;
 import com.safewind.application.controller.vo.UserLoginVO;
+import com.safewind.application.controller.vo.UserVO;
 import com.safewind.common.annotation.ApiOperationLog;
 import com.safewind.common.utils.Result;
 import com.safewind.infra.security.service.SysLoginService;
@@ -44,5 +45,11 @@ public class UserController {
     @GetMapping("/getLoginUser")
     public Result<String> getLoginUser(){
         return Result.success("成功");
+    }
+
+    @ApiOperationLog(description = "用户中心")
+    @GetMapping("/getUserInfo")
+    public Result<UserVO> getUserInfo(@RequestParam("userId") Long userId){
+        return null;
     }
 }

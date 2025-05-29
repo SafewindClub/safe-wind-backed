@@ -13,6 +13,8 @@
     <file url="file://$PROJECT_DIR$/Safewind-domain/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Safewind-infra/Safewind-infra-basic/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Safewind-infra/Safewind-infra-basic/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Safewind-infra/Safewind-infra-file/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Safewind-infra/Safewind-infra-file/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Safewind-infra/Safewind-infra-redis/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Safewind-infra/Safewind-infra-redis/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Safewind-infra/Safewind-infra-security/src/main/java" charset="UTF-8" />

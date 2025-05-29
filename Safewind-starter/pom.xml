@@ -46,6 +46,11 @@
             <artifactId>Safewind-common</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.safewind.infra.file</groupId>
+            <artifactId>Safewind-infra-file</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

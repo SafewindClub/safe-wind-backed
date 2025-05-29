@@ -4,21 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.safewind</groupId>
-        <artifactId>Safewind</artifactId>
+        <groupId>com.safewind.infra</groupId>
+        <artifactId>Safewind-infra</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <groupId>com.safewind.infra</groupId>
-    <artifactId>Safewind-infra</artifactId>
+    <groupId>com.safewind.infra.file</groupId>
+    <artifactId>Safewind-infra-file</artifactId>
     <name>${project.artifactId}</name>
-    <description>基础设施层：存放dao，redis，mq等基础设施，保证纯净</description>
-    <modules>
-        <module>Safewind-infra-basic</module>
-        <module>Safewind-infra-security</module>
-        <module>Safewind-infra-file</module>
-    </modules>
-    <packaging>pom</packaging>
+    <description>文件存储模块</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -27,6 +21,16 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.safewind.common</groupId>
+            <artifactId>Safewind-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
