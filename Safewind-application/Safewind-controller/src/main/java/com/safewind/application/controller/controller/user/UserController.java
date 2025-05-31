@@ -59,7 +59,19 @@ public class UserController {
     public Result<UserVO> getUserInfo(){
         UserBO userBO = userDomainService.getUserInfo();
         log.info("userBO={}", userBO);
-        // todo 不太优雅，考虑用MapStruct
+        // 抽成方法存放，实体转化
+        UserVO userVO = getUserVO(userBO);
+        log.info("==> getUserInfo获得信息={}",userVO);
+        return Result.success(userVO);
+    }
+
+    /**
+     * UserBO->UserVO
+     *
+     * @param userBO 领域实体类
+     * @return 返回实体类
+     * */
+    private static UserVO getUserVO(UserBO userBO) {
         UserVO userVO = UserVO.builder()
                 .userId(userBO.getUserId())
                 .studentId(userBO.getStudentId())
@@ -76,7 +88,6 @@ public class UserController {
                 .roleKey(userBO.getRole().getRoleKey())
                 .deptName(userBO.getDept().getName())
                 .build();
-        log.info("==> getUserInfo获得信息={}",userVO);
-        return Result.success(userVO);
+        return userVO;
     }
 }

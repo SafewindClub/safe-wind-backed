@@ -28,6 +28,7 @@ public class SysLoginService {
 
     @Autowired
     private TokenService tokenService;
+
     @Autowired
     private RedisUtil redisUtil;
 
@@ -40,7 +41,8 @@ public class SysLoginService {
         // 用户验证
         Authentication authentication = null;
         try {
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userName, password);
+            UsernamePasswordAuthenticationToken authenticationToken =
+                    new UsernamePasswordAuthenticationToken(userName, password);
             // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
             authentication = authenticationManager.authenticate(authenticationToken);
         } catch (Exception e) {

@@ -1,5 +1,6 @@
 package com.safewind.application.controller.dto;
 
+import com.safewind.common.annotation.Xss;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -13,16 +14,19 @@ public class UserLoginDTO {
     /**
      * 用户名
      * */
+    @Xss
     @NotBlank(message = "用户名不能为空")
     private String userName;
     /**
      * 密码
      * */
+    @Xss
     @NotBlank(message = "密码不能为空")
     private String password;
     /**
      * 验证码
      * */
+    @Xss
     @NotBlank(message = "验证码不能为空")
     private String code;
     /**

@@ -8,6 +8,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
  */
 @Aspect
 @Slf4j
+@Component
 public class ApiOperationLogAspect {
     /**
      * 以自定义 @ApiOperationLog 注解为切点，凡是添加 @ApiOperationLog 的方法，都会执行环绕中的代码
@@ -54,7 +56,7 @@ public class ApiOperationLogAspect {
         String description = getApiOperationLogDescription(joinPoint);
 
         // 打印请求相关参数
-        log.info("====== 请求开始: [{}], 入参: {}, 请求类: {}, 请求方法: {} ==================",
+        log.info("===> 请求开始: [{}], 入参: {}, 请求类: {}, 请求方法: {} ====",
                 description, argsJsonStr, className, methodName);
 
         // 执行切点方法
@@ -64,7 +66,7 @@ public class ApiOperationLogAspect {
         long executionTime = System.currentTimeMillis() - startTime;
 
         // 打印出参等相关信息
-        log.info("====== 请求结束: [{}], 耗时: {}ms, 出参: {} ================= ",
+        log.info("===> 请求结束: [{}], 耗时: {}ms, 出参: {} ==== ",
                 description, executionTime, JsonUtils.toJsonString(result));
 
         return result;

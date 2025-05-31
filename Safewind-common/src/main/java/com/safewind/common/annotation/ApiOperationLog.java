@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 /**
  * @Author: Darven
  * @CreateTime: 2025-03-26  19:43
- * @Description: TODO
+ * @Description: 日志打印注解
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
